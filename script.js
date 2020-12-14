@@ -2,7 +2,7 @@ var scores,roundScore,activePlayer,dice;
 
 scores = [0,0];
 roundScore = 0;
-activePlayer = 1;
+activePlayer = 0;
 
 
 document.querySelector("#current--" +activePlayer).textContent=dice;
@@ -26,5 +26,32 @@ function but()
     var diceDOM = document.querySelector(".dice");
     diceDOM.style.display='block';
     diceDOM.src = 'dice-'+dice+".png";
+    // update round score If the rolled number was not 1
+
+    if( dice !== 1)
+    {
+        roundScore += dice;
+        
+        document.querySelector("#current--"+activePlayer).textContent = roundScore;
+
+    }else{
+        if(activePlayer==0)
+        {
+            activePlayer = 1;
+        }else{
+            activePlayer = 0;
+        }
+        roundScore = 0;
+        document.getElementById("current--0").textContent='0';
+        document.getElementById("current--1").textContent='0';
+
+        document.querySelector(".player player--0").classList.toggle('active');
+        document.querySelector(".player player--1").classList.toggle('active');
+        document.querySelector(".dice").style.display = 'none';
+    }
+
+
+
+
 
 }
